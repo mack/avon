@@ -1,2 +1,14 @@
-# shiftkey-hackathon-2019
-Shiftkey 2019 hackathon
+# DalhousieHackathon2019
+TBD
+## Brainstorming
+TBD
+## Getting Ready
+TBD
+## Building
+TBD
+## Issues
+TBD
+## The Outcome
+TBD
+## Future
+TBD
