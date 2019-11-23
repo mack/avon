@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAq-CY-C4q" customClass="SiriWaveView" customModule="avon" customModuleProvider="target">
-                                <rect key="frame" x="30" y="161" width="343" height="200"/>
+                                <rect key="frame" x="30" y="353" width="343" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="O2x-Or-Iew"/>
@@ -26,7 +26,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="YAq-CY-C4q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="117" id="9Kh-i7-7cw"/>
+                            <constraint firstItem="YAq-CY-C4q" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="RRu-Dr-bL1"/>
                             <constraint firstItem="YAq-CY-C4q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="a9B-i5-Zih"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YAq-CY-C4q" secondAttribute="trailing" constant="41" id="pRK-rO-u7G"/>
                         </constraints>

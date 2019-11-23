@@ -10,6 +10,8 @@ import UIKit
 import Speech
 import AVKit
 
+let activators = ["yvonne", "ivan", "van", "even", "avon", "ava"]
+
 class HomeController: UIViewController {
     
     private var recorder: AVAudioRecorder!
@@ -17,6 +19,7 @@ class HomeController: UIViewController {
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
+    var lastWord: String?
     
     var textView: UILabel?
     
@@ -25,17 +28,30 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textView = UILabel(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 100, y: 100, width: 100, height: 100))
-        textView?.text = "this is a test"
+        textView = UILabel(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 50, y: 100, width: 100, height: 100))
+        textView?.text = ""
+        textView?.textAlignment = .center
+        textView?.font = UIFont.systemFont(ofSize: 20)
+        textView?.alpha = 0.5
         textView?.textColor = .white
         self.view.addSubview(textView!)
         
+        lastWord = ""
 
         self.view.backgroundColor = .black
         addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
         requestSpeechAuthorization()
     
-//        setupRecorder()
+        setupRecorder()
+    }
+    
+    private func checkActivator(word: String) -> Bool {
+        for activator in activators {
+            if word.contains(activator) {
+                return true
+            }
+        }
+        return false
     }
     
     private func requestSpeechAuthorization() {
@@ -71,32 +87,37 @@ class HomeController: UIViewController {
             return print(error)
         }
 
-//        guard let myRecognizer = SFSpeechRecognizer() else {
-//            return
-//        }
-//
-//        if !myRecognizer.isAvailable {
-//            return
-//        }
-        var lastWord = ""
+        guard let myRecognizer = SFSpeechRecognizer() else {
+            return
+        }
+
+        if !myRecognizer.isAvailable {
+            return
+        }
+
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { [weak self] (r, error) in
             let result = r!
-            print(lastWord)
-            print(result.bestTranscription.formattedString)
-            if result != nil && lastWord != result.bestTranscription.formattedString {
+//            print(lastWord)
+//            print(result.bestTranscription.formattedString)
+            if result != nil && self!.lastWord != result.bestTranscription.formattedString {
                 let bestString = result.bestTranscription.formattedString
                 var lastString: String = ""
                 for segment in result.bestTranscription.segments {
                     let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
                     lastString = String(bestString[indexTo...])
                 }
-                self!.textView!.text = lastString
+                
                 
                 let lastStringLower = lastString.lowercased()
-                if (lastStringLower == "yvonne" || lastStringLower == "van" || lastStringLower == "avon" || lastStringLower == "ivan") {
-                    print("AVON CALLED")
+                if (self!.checkActivator(word: lastStringLower)) {
+                    self!.textView!.text = "avon"
+                    self!.textView!.alpha = 1
+                    print("this is a print)")
+                } else {
+                    self!.textView!.text = lastString
+                    self!.textView!.alpha = 0.5
                 }
-                lastWord = bestString
+                self!.lastWord = bestString
             } else if let error = error {
                 print(error)
             }
@@ -140,7 +161,7 @@ class HomeController: UIViewController {
         var normalizedValue: Float
         recorder.updateMeters()
         normalizedValue = normalizedPowerLevelFromDecibels(decibels: recorder.averagePower(forChannel: 0))
-        self.siriWave.update(min(CGFloat(normalizedValue) * 30, 3))
+        self.siriWave.update(min(CGFloat(normalizedValue) * 30, 1))
     }
     
     private func normalizedPowerLevelFromDecibels(decibels: Float) -> Float {
