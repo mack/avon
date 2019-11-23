@@ -11,10 +11,17 @@ import PullUpController
 
 class SettingsController: PullUpController {
 
+    public var portraitSize: CGSize = .zero
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .blue
         
+        
+        portraitSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 50)        
+    }
+    
+    override var pullUpControllerPreferredSize: CGSize {
+        return portraitSize
     }
 }
 
