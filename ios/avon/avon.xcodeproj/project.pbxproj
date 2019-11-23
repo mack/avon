@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4C6BF7F32388E77B00915BE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6BF7F22388E77B00915BE8 /* LaunchScreen.storyboard */; };
+		4C91A7C223898DF7003B3747 /* SiriWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7C123898DF7003B3747 /* SiriWaveView.swift */; };
+		4C91A7C423898E13003B3747 /* SiriWaveLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7C323898E13003B3747 /* SiriWaveLine.swift */; };
 		4CACBAFD2388D8A2007EC88D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CACBAFC2388D8A2007EC88D /* AppDelegate.swift */; };
 		4CACBAFF2388D8A2007EC88D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CACBAFE2388D8A2007EC88D /* SceneDelegate.swift */; };
 		4CACBB012388D8A2007EC88D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CACBB002388D8A2007EC88D /* HomeController.swift */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		06BBE245E8B2D1B1B971F874 /* Pods-avon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avon.debug.xcconfig"; path = "Target Support Files/Pods-avon/Pods-avon.debug.xcconfig"; sourceTree = "<group>"; };
 		4C6BF7F22388E77B00915BE8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4C91A7C123898DF7003B3747 /* SiriWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveView.swift; sourceTree = "<group>"; };
+		4C91A7C323898E13003B3747 /* SiriWaveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveLine.swift; sourceTree = "<group>"; };
 		4CACBAF92388D8A2007EC88D /* avon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CACBAFC2388D8A2007EC88D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CACBAFE2388D8A2007EC88D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				4CACBB182388DA80007EC88D /* Settings.swift */,
+				4C91A7C123898DF7003B3747 /* SiriWaveView.swift */,
+				4C91A7C323898E13003B3747 /* SiriWaveLine.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,8 +248,10 @@
 			files = (
 				4CACBB012388D8A2007EC88D /* HomeController.swift in Sources */,
 				4CF4813B2388E09000D1A302 /* SettingsController.swift in Sources */,
+				4C91A7C223898DF7003B3747 /* SiriWaveView.swift in Sources */,
 				4CACBAFD2388D8A2007EC88D /* AppDelegate.swift in Sources */,
 				4CACBB192388DA80007EC88D /* Settings.swift in Sources */,
+				4C91A7C423898E13003B3747 /* SiriWaveLine.swift in Sources */,
 				4CACBAFF2388D8A2007EC88D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
