@@ -116,5 +116,7 @@ public class SiriWaveView: UIView {
                                start: startPoint,
                                end: endPoint,
                                options: [])
-    }
+        }
+    
+    
 }

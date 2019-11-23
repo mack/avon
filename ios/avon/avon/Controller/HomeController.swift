@@ -8,6 +8,7 @@
 
 import UIKit
 import Speech
+import AVKit
 
 class HomeController: UIViewController {
 
@@ -19,7 +20,7 @@ class HomeController: UIViewController {
     var textView: UILabel?
     
     var siriWave: SiriWaveView!
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +33,19 @@ class HomeController: UIViewController {
         self.view.backgroundColor = .black
         addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
         requestSpeechAuthorization()
+        
+        
     }
+    private func testWithoutMic() {
+        var ampl: CGFloat=1
+        let speed: CGFloat=0.1
+        
+        func modulate() {
+            ampl = Lerp.lerp(ampl,1.5,speed)
+            
+        }
+    }
+    
     
     func requestSpeechAuthorization() {
         SFSpeechRecognizer.requestAuthorization { authStatus in

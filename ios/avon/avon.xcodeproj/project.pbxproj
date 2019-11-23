@@ -17,6 +17,7 @@
 		4CACBB192388DA80007EC88D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CACBB182388DA80007EC88D /* Settings.swift */; };
 		4CF4813B2388E09000D1A302 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4813A2388E09000D1A302 /* SettingsController.swift */; };
 		4D479B6940B6B96B9AB074A8 /* Pods_avon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953200E6926CCF780A4783FF /* Pods_avon.framework */; };
+		539DCFF52389A00800DFAC8C /* Lerp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DCFF42389A00800DFAC8C /* Lerp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		4CACBB0A2388D8A3007EC88D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CACBB182388DA80007EC88D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		4CF4813A2388E09000D1A302 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		539DCFF42389A00800DFAC8C /* Lerp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lerp.swift; sourceTree = "<group>"; };
 		953200E6926CCF780A4783FF /* Pods_avon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_avon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B013604CD38D208A3E481EF7 /* Pods-avon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avon.release.xcconfig"; path = "Target Support Files/Pods-avon/Pods-avon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +71,7 @@
 		4CACBAFB2388D8A2007EC88D /* avon */ = {
 			isa = PBXGroup;
 			children = (
+				539DCFF323899FEB00DFAC8C /* Utility */,
 				4CACBB132388D8D1007EC88D /* Support */,
 				4CACBAFC2388D8A2007EC88D /* AppDelegate.swift */,
 				4CACBB122388D8CA007EC88D /* Controller */,
@@ -113,6 +116,14 @@
 				4C6BF7F22388E77B00915BE8 /* LaunchScreen.storyboard */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		539DCFF323899FEB00DFAC8C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				539DCFF42389A00800DFAC8C /* Lerp.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		7B311173691A86D9B8293AE4 /* Frameworks */ = {
@@ -246,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				539DCFF52389A00800DFAC8C /* Lerp.swift in Sources */,
 				4CACBB012388D8A2007EC88D /* HomeController.swift in Sources */,
 				4CF4813B2388E09000D1A302 /* SettingsController.swift in Sources */,
 				4C91A7C223898DF7003B3747 /* SiriWaveView.swift in Sources */,
