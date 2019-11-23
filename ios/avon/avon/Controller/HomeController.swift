@@ -34,15 +34,25 @@ class HomeController: UIViewController {
         addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
         requestSpeechAuthorization()
         
+        siriWave = SiriWaveView(frame: CGRect(x: 0, y:(UIScreen.main.bounds.height/2) - 100 , width: UIScreen.main.bounds.width, height: 200))
         
+        self.view.addSubview(siriWave)
+        testWithoutMic()
     }
+    
     private func testWithoutMic() {
-        var ampl: CGFloat=1
-        let speed: CGFloat=0.1
-        
+        var ampl: CGFloat = 1
+        let speed: CGFloat = 0.1
+
         func modulate() {
-            ampl = Lerp.lerp(ampl,1.5,speed)
-            
+            ampl = Lerp.lerp(ampl, 1.5, speed)
+            self.siriWave.update(ampl * 5)
+        }
+        
+        _ = Timeout.setInterval(TimeInterval(speed)) {
+            DispatchQueue.main.async {
+                modulate()
+            }
         }
     }
     
