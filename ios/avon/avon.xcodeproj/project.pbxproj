@@ -18,6 +18,7 @@
 		4CF4813B2388E09000D1A302 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF4813A2388E09000D1A302 /* SettingsController.swift */; };
 		4D479B6940B6B96B9AB074A8 /* Pods_avon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953200E6926CCF780A4783FF /* Pods_avon.framework */; };
 		539DCFF52389A00800DFAC8C /* Lerp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DCFF42389A00800DFAC8C /* Lerp.swift */; };
+		539DCFF72389A07300DFAC8C /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539DCFF62389A07300DFAC8C /* Timeout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		4CACBB182388DA80007EC88D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		4CF4813A2388E09000D1A302 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		539DCFF42389A00800DFAC8C /* Lerp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lerp.swift; sourceTree = "<group>"; };
+		539DCFF62389A07300DFAC8C /* Timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeout.swift; sourceTree = "<group>"; };
 		953200E6926CCF780A4783FF /* Pods_avon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_avon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B013604CD38D208A3E481EF7 /* Pods-avon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avon.release.xcconfig"; path = "Target Support Files/Pods-avon/Pods-avon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				539DCFF42389A00800DFAC8C /* Lerp.swift */,
+				539DCFF62389A07300DFAC8C /* Timeout.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				4CACBB192388DA80007EC88D /* Settings.swift in Sources */,
 				4C91A7C423898E13003B3747 /* SiriWaveLine.swift in Sources */,
 				4CACBAFF2388D8A2007EC88D /* SceneDelegate.swift in Sources */,
+				539DCFF72389A07300DFAC8C /* Timeout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
