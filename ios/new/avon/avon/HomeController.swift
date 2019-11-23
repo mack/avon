@@ -20,8 +20,8 @@ class HomeController: UIViewController {
     
     var textView: UILabel?
     
-    var siriWave: SiriWaveView!
-   
+    @IBOutlet weak var siriWave: SiriWaveView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,29 +32,64 @@ class HomeController: UIViewController {
         
 
         self.view.backgroundColor = .black
-        addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
+//        addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
         requestSpeechAuthorization()
-        
-        siriWave = SiriWaveView(frame: CGRect(x: 0, y:(UIScreen.main.bounds.height/2) - 100 , width: UIScreen.main.bounds.width, height: 200))
-        
-        self.view.addSubview(siriWave)
+    
         setupRecorder()
     }
     
-    private func testWithoutMic() {
-        var ampl: CGFloat = 1
-        let speed: CGFloat = 0.1
-
-        func modulate() {
-            ampl = Lerp.lerp(ampl, 1.5, speed)
-            self.siriWave.update(ampl * 5)
-        }
-        
-        _ = Timeout.setInterval(TimeInterval(speed)) {
-            DispatchQueue.main.async {
-                modulate()
+    private func requestSpeechAuthorization() {
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            OperationQueue.main.addOperation {
+                switch authStatus {
+                case .authorized:
+                    print("authed")
+                    self.recordAndRecognizeSpeech()
+                case .denied:
+                    print("deined")
+                case .restricted:
+                    print("restricted")
+                case .notDetermined:
+                    print("not determined")
+                @unknown default:
+                    return
+                }
             }
         }
+    }
+
+    private func recordAndRecognizeSpeech() {
+        guard let node: AVAudioInputNode? = audioEngine?.inputNode else { return }
+        let recordingFormat = node!.outputFormat(forBus: 0)
+        node?.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+            self.request.append(buffer)
+        }
+        audioEngine?.prepare()
+        do {
+            try audioEngine?.start()
+        } catch {
+            return print(error)
+        }
+        guard let myRecognizer = SFSpeechRecognizer() else {
+            return
+        }
+        if !myRecognizer.isAvailable {
+            return
+        }
+        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
+            if let result = result {
+                
+                let bestString = result.bestTranscription.formattedString
+                var lastString: String = ""
+                for segment in result.bestTranscription.segments {
+                    let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
+                    lastString = String(bestString[indexTo...])
+                }
+                self.textView!.text = lastString
+            } else if let error = error {
+                print(error)
+            }
+        })
     }
     
     private func checkMicPermission() -> Bool {
@@ -83,6 +118,7 @@ class HomeController: UIViewController {
     /// Recorder Setup Begin
        @objc func setupRecorder() {
            if(checkMicPermission()) {
+                print("permission granted")
                startRecording()
            } else {
                print("permission denied")
@@ -93,7 +129,8 @@ class HomeController: UIViewController {
         var normalizedValue: Float
         recorder.updateMeters()
         normalizedValue = normalizedPowerLevelFromDecibels(decibels: recorder.averagePower(forChannel: 0))
-        self.siriWave.update(CGFloat(normalizedValue) * 30)
+        print(CGFloat(normalizedValue) * 30)
+        self.siriWave.update(min(CGFloat(normalizedValue) * 30, 3))
     }
     
     private func normalizedPowerLevelFromDecibels(decibels: Float) -> Float {
@@ -104,7 +141,7 @@ class HomeController: UIViewController {
            
            let powDecibels = pow(10.0, 0.05 * decibels)
            let powMinDecibels = pow(10.0, 0.05 * minDecibels)
-           return pow((powDecibels - powMinDecibels) * (1.0 / (1.0 - powMinDecibels)), 1.0 / 2.0)
+        return pow((powDecibels - powMinDecibels) * (1.0 / (1.0 - powMinDecibels)), 2.0)
            
        }
 
@@ -136,66 +173,5 @@ class HomeController: UIViewController {
             print("recorder init failed")
         }
     }
-    
-    func requestSpeechAuthorization() {
-        SFSpeechRecognizer.requestAuthorization { authStatus in
-            OperationQueue.main.addOperation {
-                switch authStatus {
-                case .authorized:
-                    print("authed")
-                    self.recordAndRecognizeSpeech()
-                case .denied:
-                    print("deined")
-                case .restricted:
-                    print("restricted")
-                case .notDetermined:
-                    print("not determined")
-                @unknown default:
-                    return
-                }
-            }
-        }
-    }
-
-    func recordAndRecognizeSpeech() {
-        guard let node: AVAudioInputNode? = audioEngine?.inputNode else { return }
-        let recordingFormat = node!.outputFormat(forBus: 0)
-        node?.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-            self.request.append(buffer)
-        }
-        audioEngine?.prepare()
-        do {
-            try audioEngine?.start()
-        } catch {
-            return print(error)
-        }
-        guard let myRecognizer = SFSpeechRecognizer() else {
-            return
-        }
-        if !myRecognizer.isAvailable {
-            return
-        }
-        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
-            if let result = result {
-                
-                let bestString = result.bestTranscription.formattedString
-                var lastString: String = ""
-                for segment in result.bestTranscription.segments {
-                    let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
-                    lastString = String(bestString[indexTo...])
-                }
-                self.textView!.text = self.textView!.text! + lastString
-            } else if let error = error {
-                print(error)
-            }
-        })
-    }
-//    func recordAndRecognizeSpeech() {
-//        guard let node: AVAudioInputNode? = audioEngine?.inputNode else { return }
-//        let recordingFormat = node!.outputFormat(forBus: 0)
-//        node?.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
-//            self.request.append(buffer)
-//        }
-//    }
 }
 
