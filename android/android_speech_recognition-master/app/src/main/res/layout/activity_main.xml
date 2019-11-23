@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFFFF"
     tools:context=".MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -21,14 +22,18 @@
     </android.support.design.widget.AppBarLayout>
 
 
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="97dp"
-        android:layout_height="85dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="236dp"
+        android:layout_height="213dp"
         android:layout_gravity="center"
         android:layout_margin="@dimen/fab_margin"
+        android:background="#FFFFFFFF"
+        android:elevation="0dp"
+        android:foreground="@drawable/logo2"
         android:tint="@android:color/white"
-        app:srcCompat="@drawable/ic_mic_black_24dp" />
+        app:backgroundTint="#FFFFFFFF"
+        app:elevation="0dp" />
 
 </android.support.design.widget.CoordinatorLayout>
