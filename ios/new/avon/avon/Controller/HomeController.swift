@@ -32,10 +32,10 @@ class HomeController: UIViewController {
         
 
         self.view.backgroundColor = .black
-//        addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
+        addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
         requestSpeechAuthorization()
     
-        setupRecorder()
+//        setupRecorder()
     }
     
     private func requestSpeechAuthorization() {
@@ -70,22 +70,33 @@ class HomeController: UIViewController {
         } catch {
             return print(error)
         }
-        guard let myRecognizer = SFSpeechRecognizer() else {
-            return
-        }
-        if !myRecognizer.isAvailable {
-            return
-        }
-        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
-            if let result = result {
-                
+
+//        guard let myRecognizer = SFSpeechRecognizer() else {
+//            return
+//        }
+//
+//        if !myRecognizer.isAvailable {
+//            return
+//        }
+        var lastWord = ""
+        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { [weak self] (r, error) in
+            let result = r!
+            print(lastWord)
+            print(result.bestTranscription.formattedString)
+            if result != nil && lastWord != result.bestTranscription.formattedString {
                 let bestString = result.bestTranscription.formattedString
                 var lastString: String = ""
                 for segment in result.bestTranscription.segments {
                     let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
                     lastString = String(bestString[indexTo...])
                 }
-                self.textView!.text = lastString
+                self!.textView!.text = lastString
+                
+                let lastStringLower = lastString.lowercased()
+                if (lastStringLower == "yvonne" || lastStringLower == "van" || lastStringLower == "avon" || lastStringLower == "ivan") {
+                    print("AVON CALLED")
+                }
+                lastWord = bestString
             } else if let error = error {
                 print(error)
             }
@@ -129,7 +140,6 @@ class HomeController: UIViewController {
         var normalizedValue: Float
         recorder.updateMeters()
         normalizedValue = normalizedPowerLevelFromDecibels(decibels: recorder.averagePower(forChannel: 0))
-        print(CGFloat(normalizedValue) * 30)
         self.siriWave.update(min(CGFloat(normalizedValue) * 30, 3))
     }
     
