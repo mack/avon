@@ -11,6 +11,8 @@ import UIKit
 class SettingsController: PullUpController {
 
     public var portraitSize: CGSize = .zero
+    var commands = ["Call", "Text", "Reminder", "temp"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -25,7 +27,7 @@ class SettingsController: PullUpController {
         let tableView = UITableView(frame: CGRect(x: 0, y: 120, width: self.view.bounds.width, height: UIScreen.main.bounds.height - 120))
         self.view.addSubview(tableView)
         tableView.isScrollEnabled = false
-        tableView.separatorColor = .clear
+        //tableView.separatorColor = .clear
         
         portraitSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
     }
@@ -39,3 +41,16 @@ class SettingsController: PullUpController {
     }
 }
 
+
+extension SettingsController: UITableViewDataSource {
+
+      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return commands.count
+      }
+        
+      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = commands[indexPath.row]
+        return cell
+      }
+}
