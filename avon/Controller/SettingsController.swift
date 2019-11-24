@@ -17,11 +17,11 @@ var Commands = [
 ]
 
 var Extensions = [
-    Extension(name: "Dangerous Areas", description: "", price: 0.99),
-    Extension(name: "Traffic Detector", description: "", price: 0.99),
+    Extension(name: "Discord", description: "", price: 0.99),
+    Extension(name: "Slack", description: "", price: 0.99),
+    Extension(name: "Dangerous Areas", description: "", price: 0),
+    Extension(name: "Traffic Detector", description: "", price: 0),
     Extension(name: "Upcoming crosswalk", description: "", price: 0),
-    Extension(name: "Discord", description: "", price: 0),
-    Extension(name: "Slack", description: "", price: 0),
     Extension(name: "Email Notifier", description: "", price: 0),
 ]
 
