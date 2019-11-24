@@ -177,8 +177,12 @@ class HomeController: UIViewController {
                    let minutes = calendar.component(.minute, from: date)
                    let hours = hour - 12
                    let minute = minutes
-                
-                if (hour > 12 && minute < 10) {
+            
+                if(hour == 0 && minute < 10){
+                    self.say("It is twelve o " + String(minutes) + "am")
+                }else if(hour == 0){
+                    self.say("It is twelve " + String(minutes) + "am")
+                }else if (hour > 12 && minute < 10) {
                     self.say("It is" + String(hours) + " o " + String(minutes) + "pm")
                 }else if(hour > 12){
                     self.say("It is" + String(hours) + "  " + String(minutes) + "pm")
