@@ -164,6 +164,26 @@ class HomeController: UIViewController {
                 } else {
                     self.say("Sorry, I don't know how to text that person yet.")
                 }
+            } else if (self.activeCommand!.contains("what") && self.activeCommand!.contains("time")){
+                   let date = Date()
+                   let calendar = Calendar.current
+                   let hour = calendar.component(.hour, from: date)
+                   let minutes = calendar.component(.minute, from: date)
+                   let hours = hour - 12
+                   let minute = minutes
+                
+                if (hour > 12 && minute < 10) {
+                    self.say("It is" + String(hours) + " o " + String(minutes) + "pm right now")
+                }else if(hour > 12){
+                    self.say("It is" + String(hours) + "  " + String(minutes) + "pm right now")
+                }
+                else if (minute < 10){
+                   self.say("It is" + String(hour) + " o " + String(minutes) + "am right now")
+                }else{
+                    self.say("It is" + String(hour) + "  " + String(minutes) + "am right now")
+                }
+                
+                
             } else {
                 self.say("Sorry, command not found.")
             }
@@ -172,7 +192,7 @@ class HomeController: UIViewController {
             self.activeCommand = ""
             self.textView!.text = ""
         }
-
+        
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { [weak self] (result, error) in
             if let result = result {
                 let bestString = result.bestTranscription.formattedString
