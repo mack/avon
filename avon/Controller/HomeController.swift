@@ -88,10 +88,26 @@ class HomeController: UIViewController {
         }
     }
     
+    private func checkReplace(_ word: String) -> String {
+        switch word {
+        case "jared":
+            return "jarret"
+        case "jarred":
+            return "jarret"
+        case "jarredd":
+            return "jarret"
+        case "jaredd":
+            return "jarret"
+        case "april":
+            return "apurv"
+        default:
+            return word
+        }
+    }
+    
     private func resetSpeechRecognition() {
         recognitionTask?.finish()
         recognitionTask = nil
-        // stop audio
         request.endAudio()
         request = SFSpeechAudioBufferRecognitionRequest()   // recreates recognitionRequest object.
         audioEngine!.stop()
@@ -99,23 +115,12 @@ class HomeController: UIViewController {
         recordAndRecognizeSpeech()
     }
     
-    func debounce(delay: DispatchTimeInterval, queue: DispatchQueue = .main, action: @escaping (() -> Void)) -> () -> Void {
+    private func debounce(delay: DispatchTimeInterval, queue: DispatchQueue = .main, action: @escaping (() -> Void)) -> () -> Void {
         var currentWorkItem: DispatchWorkItem?
         return {
             currentWorkItem?.cancel()
             currentWorkItem = DispatchWorkItem { action() }
             queue.asyncAfter(deadline: .now() + delay, execute: currentWorkItem!)
-        }
-    }
-    
-    private func checkReplace(_ word: String) -> String {
-        switch word {
-        case "jared":
-            return "jarret"
-        case "april":
-            return "apurv"
-        default:
-            return word
         }
     }
     
@@ -155,7 +160,7 @@ class HomeController: UIViewController {
         let debounceReload = debounce(delay: .milliseconds(4000)) {
             // Run command here
             if (self.activeCommand!.contains("text")) {
-                if (self.activeCommand!.contains("joy")) {
+                if (self.activeCommand!.contains("jarret")) {
                     var splits = self.activeCommand!.split(separator: " ")
                     splits.removeFirst(2)
                     let message = splits.joined(separator: " ")
@@ -164,7 +169,7 @@ class HomeController: UIViewController {
                      let authToken = "9b79b21d04f0c145aeb6d5d4a30a032c"
 
                        let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-                       let parameters = ["From": "19028003422", "To": "19025801237", "Body": message]
+                       let parameters = ["From": "19028003422", "To": "19028772889", "Body": message]
                          AF.request(url, method: .post, parameters: parameters).authenticate(username: accountSID, password: authToken)
                          .responseJSON { response in
                             self.say("Your text message has been sent")
