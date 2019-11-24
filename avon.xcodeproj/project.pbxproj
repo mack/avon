@@ -20,6 +20,7 @@
 		4C91A7ED2389A9F0003B3747 /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7EC2389A9F0003B3747 /* Timeout.swift */; };
 		4C91A7F02389AA5F003B3747 /* SiriWaveLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7EF2389AA5F003B3747 /* SiriWaveLine.swift */; };
 		4C91A7F22389AA7D003B3747 /* SiriWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7F12389AA7D003B3747 /* SiriWaveView.swift */; };
+		4CBC4293238A332400ECE33B /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC4292238A332400ECE33B /* Command.swift */; };
 		530AB76F238A12D600B9F0E2 /* ConfirmationSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 530AB76E238A12D600B9F0E2 /* ConfirmationSound.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		4C91A7EC2389A9F0003B3747 /* Timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeout.swift; sourceTree = "<group>"; };
 		4C91A7EF2389AA5F003B3747 /* SiriWaveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveLine.swift; sourceTree = "<group>"; };
 		4C91A7F12389AA7D003B3747 /* SiriWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveView.swift; sourceTree = "<group>"; };
+		4CBC4292238A332400ECE33B /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		530AB76E238A12D600B9F0E2 /* ConfirmationSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ConfirmationSound.mp3; path = avon/Assets/ConfirmationSound.mp3; sourceTree = SOURCE_ROOT; };
 		74387DEF7D12A978765D6432 /* Pods-avon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avon.debug.xcconfig"; path = "Target Support Files/Pods-avon/Pods-avon.debug.xcconfig"; sourceTree = "<group>"; };
 		7CEE8C15B8499E375615240F /* Pods-avon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avon.release.xcconfig"; path = "Target Support Files/Pods-avon/Pods-avon.release.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		4C91A7D42389A9A5003B3747 /* avon */ = {
 			isa = PBXGroup;
 			children = (
+				4CBC4291238A331900ECE33B /* Model */,
 				530AB770238A12DF00B9F0E2 /* Assets */,
 				4C3931EE2389B5AC00C98EED /* Controller */,
 				4C91A7EE2389AA32003B3747 /* View */,
@@ -126,6 +129,14 @@
 				4C3931F22389B61E00C98EED /* PopUpController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4CBC4291238A331900ECE33B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4CBC4292238A332400ECE33B /* Command.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		530AB770238A12DF00B9F0E2 /* Assets */ = {
@@ -263,6 +274,7 @@
 				4C3931F12389B5D700C98EED /* SettingsController.swift in Sources */,
 				4C3931F32389B61E00C98EED /* PopUpController.swift in Sources */,
 				4C91A7EB2389A9E6003B3747 /* Lerp.swift in Sources */,
+				4CBC4293238A332400ECE33B /* Command.swift in Sources */,
 				4C91A7F22389AA7D003B3747 /* SiriWaveView.swift in Sources */,
 				4C91A7DA2389A9A5003B3747 /* HomeController.swift in Sources */,
 				4C91A7ED2389A9F0003B3747 /* Timeout.swift in Sources */,
