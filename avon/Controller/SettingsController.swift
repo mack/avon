@@ -31,6 +31,7 @@ class SettingsController: PullUpController {
         pageControl?.currentPageIndicatorTintColor = .black
         pageControl?.numberOfPages = 2
         pageControl!.currentPage = 0
+        pageControl!.isUserInteractionEnabled = false
         self.view.addSubview(pageControl!)
         
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 40, width: self.view.bounds.width, height: self.view.bounds.height - 40), collectionViewLayout: layout)
@@ -125,9 +126,11 @@ extension SettingsController: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellView", for: indexPath)
+
+        let titleView = UILabel(frame: CGRect(x: 35, y: 0, width: cell.bounds.width - 35, height: 100))
+        titleView.font = UIFont.boldSystemFont(ofSize: 32.0)
+
         if (indexPath.row == 0) {
-            let titleView = UILabel(frame: CGRect(x: 35, y: 0, width: cell.bounds.width - 35, height: 100))
-            titleView.font = UIFont.boldSystemFont(ofSize: 32.0)
             titleView.text = "Commands"
             
             tableView = UITableView(frame: CGRect(x: 21, y: 75, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 75))
@@ -138,11 +141,11 @@ extension SettingsController: UICollectionViewDelegateFlowLayout, UICollectionVi
             tableView?.separatorColor = .clear
 
             cell.addSubview(tableView!)
-            cell.addSubview(titleView)
         } else {
-            var view = UIView(frame: cell.bounds)
-            cell.addSubview(view)
+            titleView.text = "Extensions"
         }
+        
+        cell.addSubview(titleView)
         return cell
     }
 }
