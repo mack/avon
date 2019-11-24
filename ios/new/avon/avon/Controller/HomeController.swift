@@ -19,7 +19,7 @@ class HomeController: UIViewController {
     private var recorder: AVAudioRecorder!
     let audioEngine: AVAudioEngine? = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
-    let request = SFSpeechAudioBufferRecognitionRequest()
+    var request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
     var lastWord: String?
     var isActiveCommand: Bool?
@@ -83,12 +83,32 @@ class HomeController: UIViewController {
         }
     }
     
+    private func resetSpeechRecognition() {
+        recognitionTask?.finish()
+        recognitionTask = nil
+        // stop audio
+        request.endAudio()
+        request = SFSpeechAudioBufferRecognitionRequest()   // recreates recognitionRequest object.
+        audioEngine!.stop()
+        audioEngine!.inputNode.removeTap(onBus: 0)
+        recordAndRecognizeSpeech()
+    }
+    
     func debounce(delay: DispatchTimeInterval, queue: DispatchQueue = .main, action: @escaping (() -> Void)) -> () -> Void {
         var currentWorkItem: DispatchWorkItem?
         return {
             currentWorkItem?.cancel()
             currentWorkItem = DispatchWorkItem { action() }
             queue.asyncAfter(deadline: .now() + delay, execute: currentWorkItem!)
+        }
+    }
+    
+    private func checkReplace(_ word: String) -> String {
+        switch word {
+        case "jared":
+            return "jarret"
+        default:
+            return word
         }
     }
 
@@ -111,6 +131,11 @@ class HomeController: UIViewController {
 
         if !myRecognizer.isAvailable {
             return
+        }
+        
+        let debounceRestartSpeech = debounce(delay: .milliseconds(3000)) {
+            print("reseting speech")
+            self.resetSpeechRecognition()
         }
 
         let debounceReload = debounce(delay: .milliseconds(5000)) {
@@ -140,7 +165,8 @@ class HomeController: UIViewController {
                     let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
                     lastString = String(bestString[indexTo...])
                 }
-                let lastStringLower = lastString.lowercased()
+                let lastStringLower = self!.checkReplace(lastString.lowercased())
+                
                 if self!.lastWord != lastStringLower {
                     if (self!.checkActivator(word: lastStringLower)) {
                         self!.textView!.text = "avon"
@@ -160,6 +186,7 @@ class HomeController: UIViewController {
                 } else if let error = error {
                     print(error)
                 }
+                debounceRestartSpeech()
             }
         })
     }
