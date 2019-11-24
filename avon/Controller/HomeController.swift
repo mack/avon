@@ -182,8 +182,6 @@ class HomeController: UIViewController {
                 }else{
                     self.say("It is" + String(hour) + "  " + String(minutes) + "am")
                 }
-                
-                
             } else {
                 self.say("Sorry, command not found.")
             }

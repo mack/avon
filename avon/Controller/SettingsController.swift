@@ -12,7 +12,9 @@ class SettingsController: PullUpController {
 
     public var portraitSize: CGSize = .zero
     var commands = ["Call", "Text", "Reminder", "Speed Warnings"]
-    var tableView: UITableView?
+    var apps = ["Discord", "Email Notifier", "Slack", "Dangerous Areas", "Crosswalk Detector"]
+    
+    var commandTableView: UITableView?
     var hintLabel: UILabel?
     var pageControl: UIPageControl?
 
@@ -80,8 +82,12 @@ extension SettingsController: UITableViewDataSource {
 
     // Getting the amount of cells
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commands.count
-      }
+        if (tableView == commandTableView){
+            return commands.count
+        }else{
+            return apps.count
+        }
+    }
     
      @objc func switchChanged(_ sender : UISwitch!){
         // insert active command code here
@@ -89,21 +95,26 @@ extension SettingsController: UITableViewDataSource {
     
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel?.text = commands[indexPath.row]
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
-        
-        let switchView = UISwitch(frame: .zero)
-        switchView.setOn(false, animated: true)
-        switchView.tag = indexPath.row // for detect which row switch Changed
-        switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
-        cell.accessoryView = switchView
-        cell.selectionStyle = .none
-        switchView.onTintColor = .black
+        if tableView == self.commandTableView {
+            cell.textLabel?.text = commands[indexPath.row]
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+            
+            let switchView = UISwitch(frame: .zero)
+            switchView.setOn(false, animated: true)
+            switchView.tag = indexPath.row // for detect which row switch Changed
+            switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+            cell.accessoryView = switchView
+            cell.selectionStyle = .none
+            switchView.onTintColor = .black
+        } else {
+            cell.textLabel?.text = apps[indexPath.row]
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+            cell.selectionStyle = .none
+            // add buttons here & pics
+        }
     
         return cell
       }
-
 }
 
 
@@ -133,18 +144,27 @@ extension SettingsController: UICollectionViewDelegateFlowLayout, UICollectionVi
         if (indexPath.row == 0) {
             titleView.text = "Commands"
             
-            tableView = UITableView(frame: CGRect(x: 21, y: 75, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 75))
-            tableView!.isScrollEnabled = false
-            tableView!.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-            tableView?.rowHeight = 50
-            tableView?.dataSource = self
-            tableView?.separatorColor = .clear
+            commandTableView = UITableView(frame: CGRect(x: 21, y: 75, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 75))
+            commandTableView!.isScrollEnabled = false
+            commandTableView!.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            commandTableView?.rowHeight = 50
+            commandTableView?.dataSource = self
+            commandTableView?.separatorColor = .clear
 
-            cell.addSubview(tableView!)
+            cell.addSubview(commandTableView!)
         } else {
             titleView.text = "Extensions"
+            
+            let extensionTableView = UITableView(frame: CGRect(x: 21, y: 75, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 75))
+            extensionTableView.isScrollEnabled = false
+            extensionTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            extensionTableView.rowHeight = 50
+            extensionTableView.dataSource = self
+            extensionTableView.separatorColor = .clear
+            
+            
+            cell.addSubview(extensionTableView)
         }
-        
         cell.addSubview(titleView)
         return cell
     }
