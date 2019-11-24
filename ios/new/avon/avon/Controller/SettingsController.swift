@@ -11,6 +11,9 @@ import UIKit
 class SettingsController: PullUpController {
 
     public var portraitSize: CGSize = .zero
+    
+    let commands = ["Call", "Text", "Remind"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -25,7 +28,7 @@ class SettingsController: PullUpController {
         let tableView = UITableView(frame: CGRect(x: 0, y: 120, width: self.view.bounds.width, height: UIScreen.main.bounds.height - 120))
         self.view.addSubview(tableView)
         tableView.isScrollEnabled = false
-        tableView.separatorColor = .clear
+//        tableView.separatorColor = .clear
         
         portraitSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
     }

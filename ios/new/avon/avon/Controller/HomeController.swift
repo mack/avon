@@ -20,6 +20,8 @@ class HomeController: UIViewController {
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
     var lastWord: String?
+    var isActiveCommand: Bool?
+    var activeCommand: String?
     
     var textView: UILabel?
     
@@ -28,8 +30,13 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textView = UILabel(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 50, y: 100, width: 100, height: 100))
+        isActiveCommand = false
+        activeCommand = ""
+        
+        textView = UILabel(frame: CGRect(x: 25, y: 100, width: UIScreen.main.bounds.width - 50, height: 100))
         textView?.text = ""
+        textView?.numberOfLines = 0
+        textView?.lineBreakMode = .byWordWrapping
         textView?.textAlignment = .center
         textView?.font = UIFont.systemFont(ofSize: 20)
         textView?.alpha = 0.5
@@ -73,6 +80,15 @@ class HomeController: UIViewController {
             }
         }
     }
+    
+    func debounce(delay: DispatchTimeInterval, queue: DispatchQueue = .main, action: @escaping (() -> Void)) -> () -> Void {
+        var currentWorkItem: DispatchWorkItem?
+        return {
+            currentWorkItem?.cancel()
+            currentWorkItem = DispatchWorkItem { action() }
+            queue.asyncAfter(deadline: .now() + delay, execute: currentWorkItem!)
+        }
+    }
 
     private func recordAndRecognizeSpeech() {
         guard let node: AVAudioInputNode? = audioEngine?.inputNode else { return }
@@ -95,31 +111,41 @@ class HomeController: UIViewController {
             return
         }
 
-        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { [weak self] (r, error) in
-            let result = r!
-//            print(lastWord)
-//            print(result.bestTranscription.formattedString)
-            if result != nil && self!.lastWord != result.bestTranscription.formattedString {
+        let debounceReload = debounce(delay: .milliseconds(5000)) {
+            // Run command here
+            self.isActiveCommand = false
+            self.activeCommand = ""
+            self.textView!.text = ""
+        }
+
+        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { [weak self] (result, error) in
+            if let result = result {
                 let bestString = result.bestTranscription.formattedString
                 var lastString: String = ""
                 for segment in result.bestTranscription.segments {
                     let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
                     lastString = String(bestString[indexTo...])
                 }
-                
-                
                 let lastStringLower = lastString.lowercased()
-                if (self!.checkActivator(word: lastStringLower)) {
-                    self!.textView!.text = "avon"
-                    self!.textView!.alpha = 1
-                    print("this is a print)")
-                } else {
-                    self!.textView!.text = lastString
-                    self!.textView!.alpha = 0.5
+                if self!.lastWord != lastStringLower {
+                    if (self!.checkActivator(word: lastStringLower)) {
+                        self!.textView!.text = "avon"
+                        self!.textView!.alpha = 1
+                        self!.isActiveCommand = true
+                        debounceReload()
+                    } else {
+                        if (self!.isActiveCommand!) {
+                            self!.activeCommand! += lastStringLower + " "
+                            self!.textView!.text = self!.activeCommand!
+                        } else {
+                            self!.textView!.text = lastString
+                            self!.textView!.alpha = 0.3
+                        }
+                    }
+                    self!.lastWord = lastStringLower
+                } else if let error = error {
+                    print(error)
                 }
-                self!.lastWord = bestString
-            } else if let error = error {
-                print(error)
             }
         })
     }
