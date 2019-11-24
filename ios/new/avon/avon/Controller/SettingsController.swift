@@ -36,7 +36,7 @@ class SettingsController: PullUpController {
         self.view.addSubview(titleView)
         self.view.addSubview(hintLabel!)
         
-        tableView = UITableView(frame: CGRect(x: 21, y: 120, width: self.view.bounds.width - 20, height: UIScreen.main.bounds.height - 120))
+        tableView = UITableView(frame: CGRect(x: 21, y: 120, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 120))
 
         self.view.addSubview(tableView!)
         tableView!.isScrollEnabled = false
@@ -72,11 +72,22 @@ extension SettingsController: UITableViewDataSource {
         return commands.count
       }
     
+     @objc func switchChanged(_ sender : UISwitch!){
+        // insert active command code here
+    }
     
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         cell.textLabel?.text = commands[indexPath.row]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+        
+        let switchView = UISwitch(frame: .zero)
+        switchView.setOn(false, animated: true)
+        switchView.tag = indexPath.row // for detect which row switch Changed
+        switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+        cell.accessoryView = switchView
+        switchView.onTintColor = .black
     
         return cell
       }
