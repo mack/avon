@@ -111,6 +111,19 @@ class HomeController: UIViewController {
             return word
         }
     }
+    
+    private func say(_ word: String) {
+        // Line 1. Create an instance of AVSpeechSynthesizer.
+            var speechSynthesizer = AVSpeechSynthesizer()
+            // Line 2. Create an instance of AVSpeechUtterance and pass in a String to be spoken.
+            var speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: word)
+            //Line 3. Specify the speech utterance rate. 1 = speaking extremely the higher the values the slower speech patterns. The default rate, AVSpeechUtteranceDefaultSpeechRate is 0.5
+            speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 4.0
+            // Line 4. Specify the voice. It is explicitly set to English here, but it will use the device default if not specified.
+            speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            // Line 5. Pass in the urrerance to the synthesizer to actually speak.
+            speechSynthesizer.speak(speechUtterance)
+    }
 
     private func recordAndRecognizeSpeech() {
         guard let node: AVAudioInputNode? = audioEngine?.inputNode else { return }
@@ -140,16 +153,22 @@ class HomeController: UIViewController {
 
         let debounceReload = debounce(delay: .milliseconds(5000)) {
             // Run command here
-            if (self.activeCommand!.contains("text jarret")) {
-                let accountSID = "AC0e6d382e50f439bda06432380ca4a933"
-                let authToken = "9b79b21d04f0c145aeb6d5d4a30a032c"
+            if (self.activeCommand!.contains("text")) {
+                if (self.activeCommand!.contains("text")) {
+                    let accountSID = "AC0e6d382e50f439bda06432380ca4a933"
+                     let authToken = "9b79b21d04f0c145aeb6d5d4a30a032c"
 
-                  let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-                  let parameters = ["From": "19028003422", "To": "19028772889", "Body": "Hello from Swift!"]
-                    AF.request(url, method: .post, parameters: parameters).authenticate(username: accountSID, password: authToken)
-                    .responseJSON { response in
-                      debugPrint(response)
-                  }
+                       let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
+                       let parameters = ["From": "19028003422", "To": "19028772889", "Body": "Hello from Swift!"]
+                         AF.request(url, method: .post, parameters: parameters).authenticate(username: accountSID, password: authToken)
+                         .responseJSON { response in
+                           debugPrint(response)
+                       }
+                } else {
+                    self.say("Sorry, I don't know how to text that person yet.")
+                }
+            } else {
+                self.say("Sorry, command not found.")
             }
             
             self.isActiveCommand = false
