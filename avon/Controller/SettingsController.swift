@@ -8,10 +8,17 @@
 
 import UIKit
 
+var Commands = [
+    Command(name: "Call", active: false, fn: ()),
+    Command(name: "Text", active: true, fn: nil),
+    Command(name: "Reminder", active: false, fn: nil),
+    Command(name: "Speed Warnings", active: false, fn: nil),
+    Command(name: "Current Time", active: true, fn: nil),
+]
+
 class SettingsController: PullUpController {
 
     public var portraitSize: CGSize = .zero
-    var commands = ["Call", "Text", "Reminder", "Speed Warnings"]
     var tableView: UITableView?
     var hintLabel: UILabel?
     var pageControl: UIPageControl?
@@ -80,7 +87,7 @@ extension SettingsController: UITableViewDataSource {
 
     // Getting the amount of cells
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commands.count
+        return Commands.count
       }
     
      @objc func switchChanged(_ sender : UISwitch!){
@@ -90,13 +97,14 @@ extension SettingsController: UITableViewDataSource {
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = commands[indexPath.row]
+        cell.textLabel?.text = Commands[indexPath.row].name
         cell.textLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
         
         let switchView = UISwitch(frame: .zero)
         switchView.setOn(false, animated: true)
         switchView.tag = indexPath.row // for detect which row switch Changed
         switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+        switchView.isOn = Commands[indexPath.row].active
         cell.accessoryView = switchView
         cell.selectionStyle = .none
         switchView.onTintColor = .black

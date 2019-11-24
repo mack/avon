@@ -15,7 +15,7 @@ import AVFoundation
 
 var player: AVAudioPlayer?
 // maybe needs "even"
-let activators = ["yvonne", "ivan", "van", "avon", "ava"]
+let activators = ["yvonne", "even", "ivan", "van", "avon", "ava"]
 
 class HomeController: UIViewController {
     
@@ -37,7 +37,7 @@ class HomeController: UIViewController {
         isActiveCommand = false
         activeCommand = ""
         
-        textView = UILabel(frame: CGRect(x: 25, y: 160, width: UIScreen.main.bounds.width - 50, height: 100))
+        textView = UILabel(frame: CGRect(x: 25, y: 260, width: UIScreen.main.bounds.width - 50, height: 100))
         textView?.text = ""
         textView?.numberOfLines = 0
         textView?.lineBreakMode = .byWordWrapping
@@ -50,7 +50,8 @@ class HomeController: UIViewController {
         lastWord = ""
 
         self.view.backgroundColor = .black
-        addPullUpController(SettingsController(), initialStickyPointOffset: 40, animated: true)
+        
+        addPullUpController(SettingsController(), initialStickyPointOffset: 58, animated: true)
         requestSpeechAuthorization()
     
         setupRecorder()
