@@ -36,7 +36,7 @@ class SettingsController: PullUpController {
         self.view.addSubview(titleView)
         self.view.addSubview(hintLabel!)
         
-        tableView = UITableView(frame: CGRect(x: 21, y: 120, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 120))
+        tableView = UITableView(frame: CGRect(x: 21, y: 105, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 105))
 
         self.view.addSubview(tableView!)
         tableView!.isScrollEnabled = false
@@ -87,6 +87,7 @@ extension SettingsController: UITableViewDataSource {
         switchView.tag = indexPath.row // for detect which row switch Changed
         switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         cell.accessoryView = switchView
+        cell.selectionStyle = .none
         switchView.onTintColor = .black
     
         return cell
