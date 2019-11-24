@@ -173,14 +173,14 @@ class HomeController: UIViewController {
                    let minute = minutes
                 
                 if (hour > 12 && minute < 10) {
-                    self.say("It is" + String(hours) + " o " + String(minutes) + "pm right now")
+                    self.say("It is" + String(hours) + " o " + String(minutes) + "pm")
                 }else if(hour > 12){
-                    self.say("It is" + String(hours) + "  " + String(minutes) + "pm right now")
+                    self.say("It is" + String(hours) + "  " + String(minutes) + "pm")
                 }
                 else if (minute < 10){
-                   self.say("It is" + String(hour) + " o " + String(minutes) + "am right now")
+                   self.say("It is" + String(hour) + " o " + String(minutes) + "am")
                 }else{
-                    self.say("It is" + String(hour) + "  " + String(minutes) + "am right now")
+                    self.say("It is" + String(hour) + "  " + String(minutes) + "am")
                 }
                 
                 
