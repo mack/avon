@@ -16,6 +16,17 @@ var Commands = [
     Command(name: "Current Time", active: true, fn: nil),
 ]
 
+var Extensions = [
+    Extension(name: "Dangerous Areas", description: "", price: 0.99),
+    Extension(name: "Traffic Detector", description: "", price: 0.99),
+    Extension(name: "Upcoming crosswalk", description: "", price: 0),
+    Extension(name: "Discord", description: "", price: 0),
+    Extension(name: "Slack", description: "", price: 0),
+    Extension(name: "Email Notifier", description: "", price: 0),
+]
+
+var apps = ["Discord", "Email Notifier", "Slack", "Dangerous Areas", "Crosswalk Detector"]
+
 class TextField: UITextField {
 
     let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
@@ -36,7 +47,6 @@ class TextField: UITextField {
 class SettingsController: PullUpController {
 
     public var portraitSize: CGSize = .zero
-    var apps = ["Discord", "Email Notifier", "Slack", "Dangerous Areas", "Crosswalk Detector"]
     var commandTableView: UITableView?
 
     var hintLabel: UILabel?
@@ -110,7 +120,7 @@ extension SettingsController: UITableViewDataSource {
         if (tableView == commandTableView){
             return Commands.count
         }else{
-            return apps.count
+            return Extensions.count
         }
     }
     
@@ -134,12 +144,14 @@ extension SettingsController: UITableViewDataSource {
             cell.selectionStyle = .none
             switchView.onTintColor = .black
         } else {
-            cell.textLabel?.text = apps[indexPath.row]
+            cell.textLabel?.text = Extensions[indexPath.row].name
             cell.textLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
             cell.selectionStyle = .none
-            // add buttons here & pics
-            let button = UIButton(frame: CGRect(x: cell.bounds.width - 55, y: (cell.bounds.height/2) - 15, width: 60, height: 30))
-            button.setTitle("Get", for: .normal)
+            
+            let price = Extensions[indexPath.row].price
+            
+            let button = UIButton(frame: CGRect(x: cell.bounds.width - 22, y: (cell.bounds.height/2) - 15, width: 60, height: 30))
+            button.setTitle(price == 0 ? "Get" : "$" + String(price), for: .normal)
             button.setTitleColor(.white, for: .normal)
             button.backgroundColor = .black
             button.layer.cornerRadius = 15
