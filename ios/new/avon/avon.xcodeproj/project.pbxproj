@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35AA66E4D7A9219766A3DB7B /* Pods_avon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B5E9F73C4381D0252D1650 /* Pods_avon.framework */; };
 		4C3931F12389B5D700C98EED /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3931F02389B5D700C98EED /* SettingsController.swift */; };
 		4C3931F32389B61E00C98EED /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3931F22389B61E00C98EED /* PopUpController.swift */; };
 		4C91A7D62389A9A5003B3747 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7D52389A9A5003B3747 /* AppDelegate.swift */; };
@@ -36,6 +37,9 @@
 		4C91A7EC2389A9F0003B3747 /* Timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeout.swift; sourceTree = "<group>"; };
 		4C91A7EF2389AA5F003B3747 /* SiriWaveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveLine.swift; sourceTree = "<group>"; };
 		4C91A7F12389AA7D003B3747 /* SiriWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveView.swift; sourceTree = "<group>"; };
+		74387DEF7D12A978765D6432 /* Pods-avon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avon.debug.xcconfig"; path = "Target Support Files/Pods-avon/Pods-avon.debug.xcconfig"; sourceTree = "<group>"; };
+		7CEE8C15B8499E375615240F /* Pods-avon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-avon.release.xcconfig"; path = "Target Support Files/Pods-avon/Pods-avon.release.xcconfig"; sourceTree = "<group>"; };
+		E5B5E9F73C4381D0252D1650 /* Pods_avon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_avon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +47,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35AA66E4D7A9219766A3DB7B /* Pods_avon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A3FFE2DCE589911F136EF8B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74387DEF7D12A978765D6432 /* Pods-avon.debug.xcconfig */,
+				7CEE8C15B8499E375615240F /* Pods-avon.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4C3931EE2389B5AC00C98EED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +78,8 @@
 			children = (
 				4C91A7D42389A9A5003B3747 /* avon */,
 				4C91A7D32389A9A5003B3747 /* Products */,
+				4A3FFE2DCE589911F136EF8B /* Pods */,
+				EBCBC92E5F99CB0405EA2F5E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +126,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EBCBC92E5F99CB0405EA2F5E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5B5E9F73C4381D0252D1650 /* Pods_avon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -116,9 +141,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C91A7E62389A9A7003B3747 /* Build configuration list for PBXNativeTarget "avon" */;
 			buildPhases = (
+				4E53B25D03D086A1E56AF4B2 /* [CP] Check Pods Manifest.lock */,
 				4C91A7CE2389A9A5003B3747 /* Sources */,
 				4C91A7CF2389A9A5003B3747 /* Frameworks */,
 				4C91A7D02389A9A5003B3747 /* Resources */,
+				D4A2F99944132836FF406F2E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -174,6 +201,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4E53B25D03D086A1E56AF4B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-avon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4A2F99944132836FF406F2E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-avon/Pods-avon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-avon/Pods-avon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-avon/Pods-avon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4C91A7CE2389A9A5003B3747 /* Sources */ = {
@@ -330,6 +399,7 @@
 		};
 		4C91A7E72389A9A7003B3747 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74387DEF7D12A978765D6432 /* Pods-avon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -347,6 +417,7 @@
 		};
 		4C91A7E82389A9A7003B3747 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CEE8C15B8499E375615240F /* Pods-avon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

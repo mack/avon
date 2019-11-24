@@ -9,6 +9,8 @@
 import UIKit
 import Speech
 import AVKit
+import Foundation
+import Alamofire
 
 let activators = ["yvonne", "ivan", "van", "even", "avon", "ava"]
 
@@ -113,6 +115,18 @@ class HomeController: UIViewController {
 
         let debounceReload = debounce(delay: .milliseconds(5000)) {
             // Run command here
+            if (self.activeCommand!.contains("text jarret")) {
+                let accountSID = "AC0e6d382e50f439bda06432380ca4a933"
+                let authToken = "9b79b21d04f0c145aeb6d5d4a30a032c"
+
+                  let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
+                  let parameters = ["From": "19028003422", "To": "19028772889", "Body": "Hello from Swift!"]
+                    AF.request(url, method: .post, parameters: parameters).authenticate(username: accountSID, password: authToken)
+                    .responseJSON { response in
+                      debugPrint(response)
+                  }
+            }
+            
             self.isActiveCommand = false
             self.activeCommand = ""
             self.textView!.text = ""
