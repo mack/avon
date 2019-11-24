@@ -16,6 +16,23 @@ var Commands = [
     Command(name: "Current Time", active: true, fn: nil),
 ]
 
+class TextField: UITextField {
+
+    let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+}
+
 class SettingsController: PullUpController {
 
     public var portraitSize: CGSize = .zero
@@ -172,14 +189,23 @@ extension SettingsController: UICollectionViewDelegateFlowLayout, UICollectionVi
         } else {
             titleView.text = "Extensions"
             
-            let extensionTableView = UITableView(frame: CGRect(x: 21, y: 75, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 75))
+            let extensionTableView = UITableView(frame: CGRect(x: 21, y: 125, width: self.view.bounds.width - 40, height: UIScreen.main.bounds.height - 75))
             extensionTableView.isScrollEnabled = false
             extensionTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
             extensionTableView.rowHeight = 50
             extensionTableView.dataSource = self
             extensionTableView.separatorColor = .clear
             
+            let searchBar = TextField(frame: CGRect(x: 35, y: 80, width: self.view.bounds.width - 67, height: 40))
+            searchBar.backgroundColor = .white
+            searchBar.layer.borderColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 0.7).cgColor
+            searchBar.layer.borderWidth = 1
+            searchBar.layer.cornerRadius = 5
+            searchBar.placeholder = "Search for an extension..."
+            searchBar.font = UIFont.systemFont(ofSize: 15)
+            cell.addSubview(searchBar)
             
+
             cell.addSubview(extensionTableView)
         }
         cell.addSubview(titleView)
