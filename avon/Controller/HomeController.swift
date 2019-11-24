@@ -51,6 +51,8 @@ class HomeController: UIViewController {
 
         self.view.backgroundColor = .black
         
+        // 58 - simulator
+        // 78 - ios
         addPullUpController(SettingsController(), initialStickyPointOffset: 58, animated: true)
         requestSpeechAuthorization()
     
@@ -110,6 +112,8 @@ class HomeController: UIViewController {
         switch word {
         case "jared":
             return "jarret"
+        case "april":
+            return "apurv"
         default:
             return word
         }
@@ -145,14 +149,13 @@ class HomeController: UIViewController {
         }
         
         let debounceRestartSpeech = debounce(delay: .milliseconds(3000)) {
-            print("reseting speech")
             self.resetSpeechRecognition()
         }
 
         let debounceReload = debounce(delay: .milliseconds(4000)) {
             // Run command here
             if (self.activeCommand!.contains("text")) {
-                if (self.activeCommand!.contains("jarret")) {
+                if (self.activeCommand!.contains("joy")) {
                     var splits = self.activeCommand!.split(separator: " ")
                     splits.removeFirst(2)
                     let message = splits.joined(separator: " ")
@@ -161,7 +164,7 @@ class HomeController: UIViewController {
                      let authToken = "9b79b21d04f0c145aeb6d5d4a30a032c"
 
                        let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-                       let parameters = ["From": "19028003422", "To": "19028772889", "Body": message]
+                       let parameters = ["From": "19028003422", "To": "19025801237", "Body": message]
                          AF.request(url, method: .post, parameters: parameters).authenticate(username: accountSID, password: authToken)
                          .responseJSON { response in
                             self.say("Your text message has been sent")
@@ -170,6 +173,8 @@ class HomeController: UIViewController {
                 } else {
                     self.say("Sorry, I don't know how to text that person yet.")
                 }
+            } else if (self.activeCommand!.contains("what") && self.activeCommand!.contains("speed")) {
+                    self.say("The speed limit on University Ave is 50 Kilometers per hour.")
             } else if (self.activeCommand!.contains("what") && self.activeCommand!.contains("time")){
                    let date = Date()
                    let calendar = Calendar.current

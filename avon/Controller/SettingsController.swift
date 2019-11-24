@@ -12,7 +12,7 @@ var Commands = [
     Command(name: "Call", active: false, fn: nil),
     Command(name: "Text", active: true, fn: nil),
     Command(name: "Reminder", active: false, fn: nil),
-    Command(name: "Speed Warnings", active: false, fn: nil),
+    Command(name: "Speed Warnings", active: true, fn: nil),
     Command(name: "Current Time", active: true, fn: nil),
 ]
 
@@ -163,6 +163,12 @@ extension SettingsController: UITableViewDataSource {
       }
 }
 
+extension SettingsController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}
 
 extension SettingsController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -209,6 +215,7 @@ extension SettingsController: UICollectionViewDelegateFlowLayout, UICollectionVi
             extensionTableView.separatorColor = .clear
             
             let searchBar = TextField(frame: CGRect(x: 35, y: 80, width: self.view.bounds.width - 67, height: 40))
+            searchBar.delegate = self
             searchBar.backgroundColor = .white
             searchBar.layer.borderColor = UIColor(red: 184/255, green: 184/255, blue: 184/255, alpha: 0.7).cgColor
             searchBar.layer.borderWidth = 1
