@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  avon
 //
-//  Created by Mackenzie Boudreau on 2019-11-22.
+//  Created by Mackenzie Boudreau & Jarret Terrio on 2019-11-22.
 //  Copyright © 2019 Mackenzie Boudreau. All rights reserved.
 //
 

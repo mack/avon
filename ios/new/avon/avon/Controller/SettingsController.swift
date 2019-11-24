@@ -2,7 +2,7 @@
 //  SettingsController.swift
 //  avon
 //
-//  Created by Mackenzie Boudreau on 2019-11-22.
+//  Created by Mackenzie Boudreau & Jarret Terrio on 2019-11-22.
 //  Copyright © 2019 Mackenzie Boudreau. All rights reserved.
 //
 
@@ -25,12 +25,13 @@ class SettingsController: PullUpController {
         titleView.text = "Commands"
         self.view.addSubview(titleView)
         
-        tableView = UITableView(frame: CGRect(x: 0, y: 120, width: self.view.bounds.width, height: UIScreen.main.bounds.height - 120))
+        tableView = UITableView(frame: CGRect(x: 25, y: 120, width: self.view.bounds.width - 20, height: UIScreen.main.bounds.height - 120))
         self.view.addSubview(tableView!)
         tableView!.isScrollEnabled = false
         tableView!.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView?.rowHeight = 60
         tableView?.dataSource = self
-       // tableView.separatorColor = .clear
+        tableView?.separatorColor = .clear
         
         portraitSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 100)
     }
@@ -55,6 +56,9 @@ extension SettingsController: UITableViewDataSource {
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = commands[indexPath.row]
+        cell.textLabel?.font = UIFont(name:"HelveticaNeue-Bold", size: 22.0)
+        cell.textLabel?.frame = CGRect(x: 25, y: 25, width: 30, height: 0)
+    
         return cell
       }
 
