@@ -121,6 +121,14 @@ extension SettingsController: UITableViewDataSource {
             cell.textLabel?.font = UIFont.systemFont(ofSize: 22, weight: .medium)
             cell.selectionStyle = .none
             // add buttons here & pics
+            let button = UIButton(frame: CGRect(x: cell.bounds.width - 55, y: (cell.bounds.height/2) - 15, width: 60, height: 30))
+            button.setTitle("Get", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .black
+            button.layer.cornerRadius = 15
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+            cell.addSubview(button)
+            
         }
         return cell
       }
