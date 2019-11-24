@@ -36,7 +36,7 @@ class HomeController: UIViewController {
         isActiveCommand = false
         activeCommand = ""
         
-        textView = UILabel(frame: CGRect(x: 25, y: 100, width: UIScreen.main.bounds.width - 50, height: 100))
+        textView = UILabel(frame: CGRect(x: 25, y: 160, width: UIScreen.main.bounds.width - 50, height: 100))
         textView?.text = ""
         textView?.numberOfLines = 0
         textView?.lineBreakMode = .byWordWrapping
@@ -114,16 +114,11 @@ class HomeController: UIViewController {
     }
     
     private func say(_ word: String) {
-        // Line 1. Create an instance of AVSpeechSynthesizer.
-            var speechSynthesizer = AVSpeechSynthesizer()
-            // Line 2. Create an instance of AVSpeechUtterance and pass in a String to be spoken.
-            var speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: word)
-            //Line 3. Specify the speech utterance rate. 1 = speaking extremely the higher the values the slower speech patterns. The default rate, AVSpeechUtteranceDefaultSpeechRate is 0.5
-            speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 4.0
-            // Line 4. Specify the voice. It is explicitly set to English here, but it will use the device default if not specified.
-            speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            // Line 5. Pass in the urrerance to the synthesizer to actually speak.
-            speechSynthesizer.speak(speechUtterance)
+        let speechSynthesizer = AVSpeechSynthesizer()
+        let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: word)
+        speechUtterance.rate = AVSpeechUtteranceDefaultSpeechRate
+        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        speechSynthesizer.speak(speechUtterance)
     }
 
     private func recordAndRecognizeSpeech() {
@@ -152,10 +147,10 @@ class HomeController: UIViewController {
             self.resetSpeechRecognition()
         }
 
-        let debounceReload = debounce(delay: .milliseconds(5000)) {
+        let debounceReload = debounce(delay: .milliseconds(3000)) {
             // Run command here
             if (self.activeCommand!.contains("text")) {
-                if (self.activeCommand!.contains("text")) {
+                if (self.activeCommand!.contains("jarret")) {
                     let accountSID = "AC0e6d382e50f439bda06432380ca4a933"
                      let authToken = "9b79b21d04f0c145aeb6d5d4a30a032c"
 
@@ -193,6 +188,7 @@ class HomeController: UIViewController {
                         self!.playSound()
                         self!.textView!.alpha = 1
                         self!.isActiveCommand = true
+                        self!.activeCommand = "avon\n"
                         debounceReload()
                     } else {
                         if (self!.isActiveCommand!) {
