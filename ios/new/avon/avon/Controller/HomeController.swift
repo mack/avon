@@ -14,7 +14,8 @@ import Alamofire
 import AVFoundation
 
 var player: AVAudioPlayer?
-let activators = ["yvonne", "ivan", "van", "even", "avon", "ava"]
+// maybe needs "even"
+let activators = ["yvonne", "ivan", "van", "avon", "ava"]
 
 class HomeController: UIViewController {
     
