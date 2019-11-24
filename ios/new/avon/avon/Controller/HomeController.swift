@@ -11,7 +11,9 @@ import Speech
 import AVKit
 import Foundation
 import Alamofire
+import AVFoundation
 
+var player: AVAudioPlayer?
 let activators = ["yvonne", "ivan", "van", "even", "avon", "ava"]
 
 class HomeController: UIViewController {
@@ -31,7 +33,6 @@ class HomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         isActiveCommand = false
         activeCommand = ""
         
@@ -189,6 +190,7 @@ class HomeController: UIViewController {
                 if self!.lastWord != lastStringLower {
                     if (self!.checkActivator(word: lastStringLower)) {
                         self!.textView!.text = "avon"
+                        self!.playSound()
                         self!.textView!.alpha = 1
                         self!.isActiveCommand = true
                         debounceReload()
@@ -261,6 +263,20 @@ class HomeController: UIViewController {
         return pow((powDecibels - powMinDecibels) * (1.0 / (1.0 - powMinDecibels)), 2.0)
            
        }
+    
+    private func playSound() {
+        guard let url = Bundle.main.url(forResource: "ConfirmationSound", withExtension: "mp3") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            guard let player = player else { return }
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 
     private func startRecording() {
         let recordingSession = AVAudioSession.sharedInstance()
