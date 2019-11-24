@@ -149,19 +149,24 @@ class HomeController: UIViewController {
             self.resetSpeechRecognition()
         }
 
-        let debounceReload = debounce(delay: .milliseconds(3000)) {
+        let debounceReload = debounce(delay: .milliseconds(4000)) {
             // Run command here
             if (self.activeCommand!.contains("text")) {
                 if (self.activeCommand!.contains("jarret")) {
+                    var splits = self.activeCommand!.split(separator: " ")
+                    splits.removeFirst(2)
+                    let message = splits.joined(separator: " ")
+
                     let accountSID = "AC0e6d382e50f439bda06432380ca4a933"
                      let authToken = "9b79b21d04f0c145aeb6d5d4a30a032c"
 
                        let url = "https://api.twilio.com/2010-04-01/Accounts/\(accountSID)/Messages"
-                       let parameters = ["From": "19028003422", "To": "19028772889", "Body": "Hello from Swift!"]
+                       let parameters = ["From": "19028003422", "To": "19028772889", "Body": message]
                          AF.request(url, method: .post, parameters: parameters).authenticate(username: accountSID, password: authToken)
                          .responseJSON { response in
-                           debugPrint(response)
+                            self.say("Your text message has been sent")
                        }
+
                 } else {
                     self.say("Sorry, I don't know how to text that person yet.")
                 }
