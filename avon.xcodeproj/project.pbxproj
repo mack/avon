@@ -16,10 +16,11 @@
 		4C91A7DD2389A9A5003B3747 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C91A7DB2389A9A5003B3747 /* Main.storyboard */; };
 		4C91A7DF2389A9A7003B3747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C91A7DE2389A9A7003B3747 /* Assets.xcassets */; };
 		4C91A7E22389A9A7003B3747 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C91A7E02389A9A7003B3747 /* LaunchScreen.storyboard */; };
-		4C91A7EB2389A9E6003B3747 /* Lerp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7EA2389A9E6003B3747 /* Lerp.swift */; };
-		4C91A7ED2389A9F0003B3747 /* Timeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7EC2389A9F0003B3747 /* Timeout.swift */; };
 		4C91A7F02389AA5F003B3747 /* SiriWaveLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7EF2389AA5F003B3747 /* SiriWaveLine.swift */; };
 		4C91A7F22389AA7D003B3747 /* SiriWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91A7F12389AA7D003B3747 /* SiriWaveView.swift */; };
+		4CA59943238C5E7A00023AB0 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA59942238C5E7A00023AB0 /* Global.swift */; };
+		4CA59946238C5F9C00023AB0 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA59945238C5F9C00023AB0 /* SpeechToText.swift */; };
+		4CA5994A238CC90300023AB0 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA59949238CC90300023AB0 /* TextField.swift */; };
 		4CBC4293238A332400ECE33B /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC4292238A332400ECE33B /* Command.swift */; };
 		4CD2FC2E238AD0980025364E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2FC2D238AD0980025364E /* Extension.swift */; };
 		530AB76F238A12D600B9F0E2 /* ConfirmationSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 530AB76E238A12D600B9F0E2 /* ConfirmationSound.mp3 */; };
@@ -36,10 +37,11 @@
 		4C91A7DE2389A9A7003B3747 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C91A7E12389A9A7003B3747 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C91A7E32389A9A7003B3747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C91A7EA2389A9E6003B3747 /* Lerp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lerp.swift; sourceTree = "<group>"; };
-		4C91A7EC2389A9F0003B3747 /* Timeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeout.swift; sourceTree = "<group>"; };
 		4C91A7EF2389AA5F003B3747 /* SiriWaveLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveLine.swift; sourceTree = "<group>"; };
 		4C91A7F12389AA7D003B3747 /* SiriWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriWaveView.swift; sourceTree = "<group>"; };
+		4CA59942238C5E7A00023AB0 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		4CA59945238C5F9C00023AB0 /* SpeechToText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
+		4CA59949238CC90300023AB0 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		4CBC4292238A332400ECE33B /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		4CD2FC2D238AD0980025364E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		530AB76E238A12D600B9F0E2 /* ConfirmationSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ConfirmationSound.mp3; path = avon/Assets/ConfirmationSound.mp3; sourceTree = SOURCE_ROOT; };
@@ -72,6 +74,7 @@
 		4C3931EE2389B5AC00C98EED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4CA59947238CC69700023AB0 /* Support */,
 				4C91A7D92389A9A5003B3747 /* HomeController.swift */,
 				4C3931F02389B5D700C98EED /* SettingsController.swift */,
 			);
@@ -99,11 +102,12 @@
 		4C91A7D42389A9A5003B3747 /* avon */ = {
 			isa = PBXGroup;
 			children = (
+				4CA59944238C5F7800023AB0 /* Utilities */,
+				4CA59941238C5E7000023AB0 /* Config */,
 				4CBC4291238A331900ECE33B /* Model */,
 				530AB770238A12DF00B9F0E2 /* Assets */,
 				4C3931EE2389B5AC00C98EED /* Controller */,
 				4C91A7EE2389AA32003B3747 /* View */,
-				4C91A7E92389A9DA003B3747 /* Utility */,
 				4C91A7D52389A9A5003B3747 /* AppDelegate.swift */,
 				4C91A7D72389A9A5003B3747 /* SceneDelegate.swift */,
 				4C91A7DB2389A9A5003B3747 /* Main.storyboard */,
@@ -114,23 +118,54 @@
 			path = avon;
 			sourceTree = "<group>";
 		};
-		4C91A7E92389A9DA003B3747 /* Utility */ = {
+		4C91A7EE2389AA32003B3747 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4C91A7EA2389A9E6003B3747 /* Lerp.swift */,
-				4C91A7EC2389A9F0003B3747 /* Timeout.swift */,
+				4CA59948238CC8EB00023AB0 /* TextField */,
+				4CA5993F238C5E3400023AB0 /* SiriWave */,
 			);
-			path = Utility;
+			path = View;
 			sourceTree = "<group>";
 		};
-		4C91A7EE2389AA32003B3747 /* View */ = {
+		4CA5993F238C5E3400023AB0 /* SiriWave */ = {
 			isa = PBXGroup;
 			children = (
 				4C91A7EF2389AA5F003B3747 /* SiriWaveLine.swift */,
 				4C91A7F12389AA7D003B3747 /* SiriWaveView.swift */,
+			);
+			path = SiriWave;
+			sourceTree = "<group>";
+		};
+		4CA59941238C5E7000023AB0 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				4CA59942238C5E7A00023AB0 /* Global.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		4CA59944238C5F7800023AB0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4CA59945238C5F9C00023AB0 /* SpeechToText.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4CA59947238CC69700023AB0 /* Support */ = {
+			isa = PBXGroup;
+			children = (
 				4C3931F22389B61E00C98EED /* PopUpController.swift */,
 			);
-			path = View;
+			path = Support;
+			sourceTree = "<group>";
+		};
+		4CA59948238CC8EB00023AB0 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				4CA59949238CC90300023AB0 /* TextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		4CBC4291238A331900ECE33B /* Model */ = {
@@ -276,12 +311,13 @@
 			files = (
 				4C3931F12389B5D700C98EED /* SettingsController.swift in Sources */,
 				4C3931F32389B61E00C98EED /* PopUpController.swift in Sources */,
-				4C91A7EB2389A9E6003B3747 /* Lerp.swift in Sources */,
 				4CBC4293238A332400ECE33B /* Command.swift in Sources */,
+				4CA5994A238CC90300023AB0 /* TextField.swift in Sources */,
 				4CD2FC2E238AD0980025364E /* Extension.swift in Sources */,
 				4C91A7F22389AA7D003B3747 /* SiriWaveView.swift in Sources */,
+				4CA59946238C5F9C00023AB0 /* SpeechToText.swift in Sources */,
 				4C91A7DA2389A9A5003B3747 /* HomeController.swift in Sources */,
-				4C91A7ED2389A9F0003B3747 /* Timeout.swift in Sources */,
+				4CA59943238C5E7A00023AB0 /* Global.swift in Sources */,
 				4C91A7D62389A9A5003B3747 /* AppDelegate.swift in Sources */,
 				4C91A7D82389A9A5003B3747 /* SceneDelegate.swift in Sources */,
 				4C91A7F02389AA5F003B3747 /* SiriWaveLine.swift in Sources */,

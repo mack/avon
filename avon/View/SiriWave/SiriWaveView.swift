@@ -99,8 +99,8 @@ public class SiriWaveView: UIView {
     private func drawSupportLine(_ ctx: CGContext) {
         
         let colors = [UIColor.clear.cgColor,
-                      UIColor(red: 1, green: 1, blue: 1, alpha: 0.5).cgColor,
-                      UIColor(red: 1, green: 1, blue: 1, alpha: 0.5).cgColor,
+                      UIColor(red: 1, green: 1, blue: 1, alpha: 0.4).cgColor,
+                      UIColor(red: 1, green: 1, blue: 1, alpha: 0.4).cgColor,
                       UIColor.clear.cgColor]
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
